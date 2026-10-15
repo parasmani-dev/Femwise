@@ -4,13 +4,11 @@
 
   /* ---- Release info: edit these when you publish a new build ----
      The APK (~350 MB) is hosted externally, not in this repo: a Google Drive
-     direct-download link or a GitHub Release asset. Paste the link into `url`,
-     set `hosted: true`, and keep `size` current (it is shown as-is because a
-     cross-origin file can't be measured from the page). */
+     direct-download link or a GitHub Release asset. Paste the link into `url`
+     and set `hosted: true`. */
   var APK = {
     version: '1.0.0',
     minAndroid: 'Android 6.0+',
-    size: '350 MB',
     url: '',                 // e.g. https://drive.google.com/uc?export=download&id=FILE_ID
     hosted: false            // set true once the release asset is uploaded
   };
@@ -67,10 +65,9 @@
     m.appendChild(clone);
   });
 
-  /* APK: fill in version/size and point the buttons at the release asset */
+  /* APK: fill in the version and point the buttons at the hosted file */
   document.querySelectorAll('[data-apk-version]').forEach(function (el) { el.textContent = APK.version; });
   document.querySelectorAll('[data-apk-android]').forEach(function (el) { el.textContent = APK.minAndroid; });
-  document.querySelectorAll('[data-apk-size]').forEach(function (el) { el.textContent = APK.hosted ? APK.size : '—'; });
 
   var statusText = APK.hosted
     ? 'Direct download. Not on Google Play yet, so Android will ask you to allow installs from this source.'

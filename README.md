@@ -29,6 +29,6 @@ plain web server). Make sure the host serves `.apk` files with the
 
 ## Editing
 
-- Release version, size and download URL: the `APK` object at the top of `js/main.js`. The APK itself is a GitHub Release asset (see `downloads/README.md`).
+- Release version and download URL: the `APK` object at the top of `js/main.js`. The APK itself is a GitHub Release asset (see `downloads/README.md`).
 - Colours, type scale and spacing: the `:root` block at the top of `css/style.css`.
 - Screenshots: `assets/screens/`, referenced from the gallery and feature cards in `index.html`.

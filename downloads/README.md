@@ -12,7 +12,7 @@ button links straight to it. Either option below works.
    `https://drive.google.com/file/d/FILE_ID/view?usp=sharing`.
 4. Turn it into a direct-download link:
    `https://drive.google.com/uc?export=download&id=FILE_ID`
-5. In `js/main.js`, paste that into `url`, set `hosted: true`, and update `size`. Commit and push.
+5. In `js/main.js`, paste that into `url` and set `hosted: true`. Commit and push.
 
 Note: for files over 100 MB Drive shows a one-click "can't scan for viruses, download anyway"
 page before the download starts. That is normal.
@@ -34,12 +34,12 @@ page before the download starts. That is normal.
 
 3. In `js/main.js`, set `url` to
    `https://github.com/parasmani-dev/Femwise/releases/download/v1.0.0/femwise.apk`,
-   set `hosted: true`, and update `size`. Commit and push.
+   and set `hosted: true`. Commit and push.
 
 ## New versions
 
-Upload the new `femwise.apk` (new Drive file or new release tag), then update `version`,
-`url` and `size` in `js/main.js`.
+Upload the new `femwise.apk` (new Drive file or new release tag), then update `version`
+and `url` in `js/main.js`.
 
 ## Shrinking the APK
 
