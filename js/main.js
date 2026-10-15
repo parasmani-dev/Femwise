@@ -2,11 +2,17 @@
 (function () {
   'use strict';
 
-  /* ---- Release info: edit these when you publish a new build ---- */
+  /* ---- Release info: edit these when you publish a new build ----
+     The APK (~350 MB) is hosted externally, not in this repo: a Google Drive
+     direct-download link or a GitHub Release asset. Paste the link into `url`,
+     set `hosted: true`, and keep `size` current (it is shown as-is because a
+     cross-origin file can't be measured from the page). */
   var APK = {
-    path: 'downloads/femwise.apk',   // drop the built APK at this path
     version: '1.0.0',
-    minAndroid: 'Android 6.0+'
+    minAndroid: 'Android 6.0+',
+    size: '350 MB',
+    url: '',                 // e.g. https://drive.google.com/uc?export=download&id=FILE_ID
+    hosted: false            // set true once the release asset is uploaded
   };
 
   var nav = document.querySelector('.nav');
@@ -61,40 +67,26 @@
     m.appendChild(clone);
   });
 
-  /* APK: fill in version, check the file exists, show its size */
+  /* APK: fill in version/size and point the buttons at the release asset */
   document.querySelectorAll('[data-apk-version]').forEach(function (el) { el.textContent = APK.version; });
   document.querySelectorAll('[data-apk-android]').forEach(function (el) { el.textContent = APK.minAndroid; });
-  document.querySelectorAll('[data-apk-link]').forEach(function (a) { a.setAttribute('href', APK.path); a.setAttribute('download', ''); });
+  document.querySelectorAll('[data-apk-size]').forEach(function (el) { el.textContent = APK.hosted ? APK.size : '—'; });
 
-  var sizeEls = document.querySelectorAll('[data-apk-size]');
-  var statusEls = document.querySelectorAll('[data-apk-status]');
-  function setStatus(text) { statusEls.forEach(function (el) { el.textContent = text; }); }
-  function setSize(text) { sizeEls.forEach(function (el) { el.textContent = text; }); }
-  function formatBytes(n) {
-    if (n >= 1048576) return (n / 1048576).toFixed(1) + ' MB';
-    if (n >= 1024) return Math.round(n / 1024) + ' KB';
-    return n + ' B';
-  }
+  var statusText = APK.hosted
+    ? 'Direct download. Not on Google Play yet, so Android will ask you to allow installs from this source.'
+    : 'The APK is not uploaded yet. Check back soon.';
+  document.querySelectorAll('[data-apk-status]').forEach(function (el) { el.textContent = statusText; });
 
-  if (location.protocol === 'file:') {
-    setSize('—');
-    setStatus('Size is detected automatically once the site is served over HTTP.');
-    return;
-  }
-
-  fetch(APK.path, { method: 'HEAD', cache: 'no-store' }).then(function (res) {
-    if (!res.ok) throw new Error('missing');
-    var len = res.headers.get('content-length');
-    setSize(len ? formatBytes(parseInt(len, 10)) : 'APK');
-    setStatus('Direct download. Not on Google Play yet, so Android will ask you to allow installs from this source.');
-  }).catch(function () {
-    setSize('—');
-    setStatus('The APK is not uploaded yet. Check back soon.');
-    document.querySelectorAll('[data-apk-link]').forEach(function (a) {
-      a.classList.add('is-disabled');
-      a.setAttribute('aria-disabled', 'true');
-      a.removeAttribute('download');
+  document.querySelectorAll('[data-apk-link]').forEach(function (a) {
+    if (APK.hosted) {
+      a.setAttribute('href', APK.url);
+      a.setAttribute('rel', 'noopener');
+      a.removeAttribute('aria-disabled');
+      a.classList.remove('is-disabled');
+    } else {
       a.setAttribute('href', '#download');
-    });
+      a.setAttribute('aria-disabled', 'true');
+      a.classList.add('is-disabled');
+    }
   });
 })();

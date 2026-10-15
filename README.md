@@ -8,9 +8,9 @@ No build step. Plain HTML, CSS and JavaScript.
 ```
 index.html        the page
 css/style.css     styles (design tokens at the top)
-js/main.js        nav, reveal animations, marquee, APK availability check
+js/main.js        nav, reveal animations, marquee, APK release link
 assets/           app screenshots and illustration
-downloads/        put femwise.apk here (see downloads/README.md)
+downloads/        how the APK is published via GitHub Releases
 ```
 
 ## Run locally
@@ -19,8 +19,7 @@ downloads/        put femwise.apk here (see downloads/README.md)
 python -m http.server 8080
 ```
 
-Then open <http://localhost:8080>. Serve it over HTTP rather than opening the file directly, so the
-APK size check and the download link work the same way they will in production.
+Then open <http://localhost:8080>.
 
 ## Deploy
 
@@ -30,6 +29,6 @@ plain web server). Make sure the host serves `.apk` files with the
 
 ## Editing
 
-- Release version and APK path: the `APK` object at the top of `js/main.js`.
+- Release version, size and download URL: the `APK` object at the top of `js/main.js`. The APK itself is a GitHub Release asset (see `downloads/README.md`).
 - Colours, type scale and spacing: the `:root` block at the top of `css/style.css`.
 - Screenshots: `assets/screens/`, referenced from the gallery and feature cards in `index.html`.
