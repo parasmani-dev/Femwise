@@ -9,8 +9,8 @@
   var APK = {
     version: '1.0.0',
     minAndroid: 'Android 6.0+',
-    url: '',                 // e.g. https://drive.google.com/uc?export=download&id=FILE_ID
-    hosted: false            // set true once the release asset is uploaded
+    url: 'https://drive.google.com/uc?export=download&id=1Ag_etq3LCogRpKeENvcZMG065PzkX0P0',
+    hosted: true             // set false to disable the button while a build is missing
   };
 
   var nav = document.querySelector('.nav');
